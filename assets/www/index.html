@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>PhoneGap</title>
+  <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+  <script type="text/javascript" charset="utf-8" src="IvanWebService.js"></script>
+        
+  <script type="text/javascript" charset="utf-8">
+     function onLoad(){
+          document.addEventListener("deviceready", onDeviceReady, true);
+     }
+     function onDeviceReady(){
+    	 //callHttpRequest();
+    	 //navigator.notification.alert("Test1");
+    	 var wws = new IvanWebService("http://030b53b.netsolhost.com/TestService.asmx");
+    	 //wws.onDone = function() {navigator.notification.alert(wws.result);}
+    	 //navigator.notification.alert("Test2");
+    	 var a = "Vu";
+    	 wws.call("HelloWorld", false, new Array("a", a));
+    	 //navigator.notification.alert("Test3");
+    	 var retVal = "string";
+         retVal = wws.getReturnValue(retVal);
+         //navigator.notification.alert("Test4");
+         navigator.notification.alert(retVal);
+     }
+     
+     function callHttpRequest() {
+         var request = new XMLHttpRequest();
+         request.open("GET", "http://search.twitter.com/search.json?q=phonegap", true);
+         request.onreadystatechange = function() {//Call a function when the state changes.
+                 if(request.readyState == 4) {
+                	 //navigator.notification.alert(request.responseText);
+                         //console.log("*"+request.responseText+"*");
+                         navigator.notification.alert(request.responseText);
+                         // Do something with the data here.
+                 }
+         }
+         
+         request.send();
+ }
+  </script>
+  </head>
+  <body onload="onLoad();">
+       <h1>Welcome to PhoneGap</h1>
+       <h2>Edit assets/www/index.html</h2>
+  </body>
+</html>
